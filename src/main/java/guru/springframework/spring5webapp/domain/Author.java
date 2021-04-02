@@ -3,6 +3,7 @@ package guru.springframework.spring5webapp.domain;
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
+import java.util.StringJoiner;
 
 @Entity
 public class Author {
@@ -69,5 +70,15 @@ public class Author {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Author.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("firstName='" + firstName + "'")
+                .add("lastName='" + lastName + "'")
+                .add("books=" + books)
+                .toString();
     }
 }
