@@ -1,6 +1,7 @@
 package guru.springframework.spring5webapp.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
@@ -17,16 +18,16 @@ public class Book {
     @JoinTable(name = "author_book",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authors;
+    //This is so-called owning side of ManyToMany mapping, because JoinTable is specified here
+    private Set<Author> authors = new HashSet<>();
 
     // Hibernate requires empty constructor (POJO :)
     public Book() {
     }
 
-    public Book(String title, String isbn, Set<Author> authors) {
+    public Book(String title, String isbn) {
         this.title = title;
         this.isbn = isbn;
-        this.authors = authors;
     }
 
     public Long getId() {
