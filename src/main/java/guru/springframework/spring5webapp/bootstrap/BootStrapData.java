@@ -17,7 +17,15 @@ public class BootStrapData implements CommandLineRunner {
     private final PublisherRepository publisherRepository;
 
 
+
     public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
+        /*
+            As of Spring Framework 4.3, an @Autowired annotation on such a constructor is no longer necessary if the target
+            bean defines only one constructor to begin with. However, if several constructors are available and there is
+            no primary/default constructor, at least one of the constructors must be annotated with @Autowired in order to
+            instruct the container which one to use. See the discussion on constructor resolution for details.
+            https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-autowired-annotation
+        */
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
         this.publisherRepository= publisherRepository;
