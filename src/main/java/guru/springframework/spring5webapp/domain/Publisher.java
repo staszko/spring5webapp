@@ -15,17 +15,17 @@ public class Publisher {
     private String name;
     private String addressFirstLine;
     private String city;
-    private String sate;
+    private String state;
     private String zipCode;
 
     public Publisher() {
     }
 
-    public Publisher(String name, String addressFirstLine, String city, String sate, String zipCode) {
+    public Publisher(String name, String addressFirstLine, String city, String state, String zipCode) {
         this.name = name;
         this.addressFirstLine = addressFirstLine;
         this.city = city;
-        this.sate = sate;
+        this.state = state;
         this.zipCode = zipCode;
     }
 
@@ -61,12 +61,12 @@ public class Publisher {
         this.city = city;
     }
 
-    public String getSate() {
-        return sate;
+    public String getState() {
+        return state;
     }
 
-    public void setSate(String sate) {
-        this.sate = sate;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getZipCode() {
@@ -97,7 +97,7 @@ public class Publisher {
                 .add("name='" + name + "'")
                 .add("addressFirstLine='" + addressFirstLine + "'")
                 .add("city='" + city + "'")
-                .add("sate='" + sate + "'")
+                .add("sate='" + state + "'")
                 .add("zipCode='" + zipCode + "'")
                 .toString();
     }
