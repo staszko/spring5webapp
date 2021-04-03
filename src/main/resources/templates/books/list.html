@@ -14,6 +14,8 @@
     </tr>
     <!-- ${books} call atribute from Model sent by Spring-->
     <tr th:each="book : ${books}">
+        <!-- we don't need put text inside <td> elements (Thymeleaf will fill them) but doing so is handy
+        while viewing raw template in a browser-->
         <td th:text="${book.id}">123</td>
         <td th:text="${book.title}">Spring in Action</td>
         <td th:text="${book.publisher.name}">Wrox</td>

@@ -12,8 +12,10 @@
         <th>First Name</th>
         <th>Last Name</th>
     </tr>
-    <!-- ${books} call atribute from Model sent by Spring-->
+    <!-- ${author} call atribute from Model sent by Spring-->
     <tr th:each="author : ${authors}">
+        <!-- we don't need put text inside <td> elements (Thymeleaf will fill them) but doing so is handy
+        while viewing raw template in a browser-->
         <td th:text="${author.id}">123</td>
         <td th:text="${author.firstName}">Joe</td>
         <td th:text="${author.lastName}">Doe</td>
