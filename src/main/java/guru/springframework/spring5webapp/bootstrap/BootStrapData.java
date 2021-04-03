@@ -16,8 +16,6 @@ public class BootStrapData implements CommandLineRunner {
     private final BookRepository bookRepository;
     private final PublisherRepository publisherRepository;
 
-
-
     public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
         /*
             As of Spring Framework 4.3, an @Autowired annotation on such a constructor is no longer necessary if the target
@@ -33,10 +31,18 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        System.out.println("Started in Bootstrap");
+
+        Publisher publisher = new Publisher("Oxford University Press", "Churchil Ave 5", "Oxford", "England", "12312");
+        publisherRepository.save(publisher);
+        System.out.println("Number of publishers: "+publisherRepository.count());
+
         Author eric = new Author("Eric", "Evans");
         Book ddd = new Book("Dommain Driven Disign", "123456");
         eric.getBooks().add(ddd);  //LoD violation I know but that's how it's implemented in the video
         ddd.getAuthors().add(eric);
+        ddd.setPublisher(publisher);
+        publisher.getBooks().add(ddd);
 
         /*Why Author is persisted first
         The Book-Author relationship has a join table. As Book is the owning side, when you save Book,
@@ -47,21 +53,21 @@ public class BootStrapData implements CommandLineRunner {
          */
         authorRepository.save(eric);
         bookRepository.save(ddd);
+        publisherRepository.save(publisher);
 
         Author rod = new Author("Rod", "Johnson");
         Book noEJB = new Book("J2EE Development without EJB", "625435145");
         rod.getBooks().add(noEJB);
         noEJB.getAuthors().add(rod);
+        noEJB.setPublisher(publisher);
+        publisher.getBooks().add(noEJB);
 
         authorRepository.save(rod);
         bookRepository.save(noEJB);
+        publisherRepository.save(publisher);
 
-
-        System.out.println("Started in Bootstrap");
         System.out.println("Number of Books " + bookRepository.count());
+        System.out.println("Publisher's number of Books " + publisher.getBooks().size());
 
-        Publisher pub = new Publisher("Oxford University Press", "Churchil Ave 5", "Oxford", "England", "12312");
-        publisherRepository.save(pub);
-        System.out.println("Number of publishers: "+publisherRepository.count());
     }
 }
